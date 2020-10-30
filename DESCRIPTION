@@ -1,16 +1,27 @@
 Package: hpsynt
-Title: What the Package Does (One Line, Title Case)
+Title: Synthetic hemispherical photographs from point clouds
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Gastón Mauro",
+           family = "Díaz",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "gastonmaurodiaz@gmail.com",
+           comment = c(ORCID = "0000-0002-0362-8616"))
+Description: This package can generate synthetic hemispherical images
+    from point clouds, such as those obtained with structure from 
+    motion. Here I implemented published algorithms and 
+    original developments.
+License: AGPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Suggests: 
+    testthat
+Imports: 
+    raster,
+    geometry,
+    orientlib,
+    parallel
+Depends: 
+    lidR

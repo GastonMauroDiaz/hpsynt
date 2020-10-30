@@ -1,0 +1,5 @@
+usethis::use_package("lidR", type = "Depends")
+usethis::use_package("raster")
+usethis::use_package("geometry")
+usethis::use_package("orientlib")
+usethis::use_package("parallel")
