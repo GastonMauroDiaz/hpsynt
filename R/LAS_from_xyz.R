@@ -8,7 +8,6 @@
 #'
 #' @seealso \code{\link[lidR]{writeLAS}}
 #' @example /inst/examples/LAS_from_xyz_example.R
-#' importFrom methods as new (madness!!)
 LAS_from_xyz <- function(xyz) {
   .make_fake_las <- function(X, Y, Z){
     data_template_names <- c("X", "Y", "Z", "gpstime","Intensity", "ReturnNumber", "NumberOfReturns",

@@ -14,15 +14,16 @@
 #'
 #' @seealso \code{\link{var2012}}
 #' @example /inst/examples/moe2014_example.R
-#' importFrom grDevice dev.off
 moe2014 <- function(X, Y, Z,
+                    station_point,
                     lens_height = 1,
                     size_weight = 0.5,
                     image_size = 1000,
                     filename) {
 
-  X <- X -mean(X)
-  Y <- Y - mean(Y)
+  X <- X - station_point[1]
+  Y <- Y - station_point[2]
+  Z <- Z - station_point[3]
   X <- X[Z > lens_height]
   Y <- Y[Z > lens_height]
   Z <- Z[Z > lens_height]
@@ -44,6 +45,7 @@ moe2014 <- function(X, Y, Z,
   model <- stats::line(c(0,pi/2), c(7, 0.5)) #parameters from reference
   fun <- function(x) model$coefficients[1] + x * model$coefficients[2]
   cex <- fun(prz[,2]) * size_weight
+
   xlim = c(-pi/2, pi/2)
 
   grDevices::jpeg(filename, image_size, image_size, "px", quality = 100)

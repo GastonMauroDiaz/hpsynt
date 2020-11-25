@@ -8,6 +8,7 @@ var2012(
   X,
   Y,
   Z,
+  station_point,
   lens_height = 1,
   sphere_diameter = 0.15,
   minimum_base_constant = 0.215,
@@ -35,12 +36,32 @@ size to be printed. See reference for details.}
 \item{image_size}{numeric. Single value. Width in pixels}
 
 \item{filename}{character. Argument to pass to \code{\link[grDevices]{jpeg}}.}
+
+\item{station_poin}{numeric vector. X, Y, and Z coordinates of a 3D point. It
+represents the position of the virtual tripod.}
 }
 \value{
 None. It writes a JPEG on \code{filename}.
 }
 \description{
 Varhola et al. (2012)'s method
+}
+\examples{
+require(lidR)
+path <- system.file("external/745_r75m_d1m_local.las", package = "hpsynt")
+las <- readLAS(path)
+
+filename <- tempfile("var2012", fileext = ".jpg")
+var2012(las@data$X, las@data$Y, las@data$Z,
+       lens_height = 1,
+       sphere_diameter = 0.5,
+       minimum_base_constant = 0.0215,
+       distance_thr = 0.75,
+       image_size = 2000,
+       filename = filename
+       )
+plotRGB(brick(filename))
+unlink(filename)
 }
 \references{
 Varhola A, Frazer GW, Teti P, Coops NC (2012). Estimation of forest

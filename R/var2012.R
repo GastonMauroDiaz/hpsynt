@@ -30,6 +30,8 @@
 #' @param X numeric vector. X coordinates of 3D points (a point cloud).
 #' @param Y numeric vector. Y coordinates of 3D points (a point cloud).
 #' @param Z numeric vector. Z coordinates of 3D points (a point cloud).
+#' @param station_poin numeric vector. X, Y, and Z coordinates of a 3D point. It
+#'     represents the position of the virtual tripod.
 #' @param lens_height numeric. Single value. Height above ground of the virtual lens.
 #' @param sphere_diameter numeric. Single value. Diameter in meters.
 #' @param minimum_base_constant numeric. Single value. It controls the minimum
@@ -48,8 +50,8 @@
 #'
 #' @seealso \code{\link{moe2014}}
 #' @example /inst/examples/var2012_example.R
-#' importFrom grDevice dev.off
 var2012 <- function(X, Y, Z,
+                    station_point,
                     lens_height = 1,
                     sphere_diameter = 0.15,
                     minimum_base_constant = 0.215,
@@ -58,8 +60,9 @@ var2012 <- function(X, Y, Z,
                     filename) {
 
 
-  X <- X -mean(X)
-  Y <- Y - mean(Y)
+  X <- X - station_point[1]
+  Y <- Y - station_point[2]
+  Z <- Z - station_point[3]
   X <- X[Z > lens_height]
   Y <- Y[Z > lens_height]
   Z <- Z[Z > lens_height]

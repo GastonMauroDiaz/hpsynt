@@ -1,6 +1,6 @@
 Package: hpsynt
 Title: Synthetic hemispherical photographs from point clouds
-Version: 0.0.0.9000
+Version: 0.1.0.9000
 Authors@R: 
     person(given = "Gastón Mauro",
            family = "Díaz",
