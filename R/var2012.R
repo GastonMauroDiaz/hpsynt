@@ -39,6 +39,8 @@
 #' @param distance_thr numeric. Single value. Minimum allowed distance to virtual lens.
 #' @param image_size numeric. Single value. Width in pixels
 #' @param filename character. Argument to pass to \code{\link[grDevices]{jpeg}}.
+#' @param filename numeric vector. Argument to pass to \code{\link[grDevices]{jpeg}}.
+#'     It must have the same length than X.
 #'
 #' @return None. It writes a JPEG on \code{filename}.
 #' @export var2012
@@ -57,7 +59,8 @@ var2012 <- function(X, Y, Z,
                     minimum_base_constant = 0.215,
                     distance_thr = 0.75,
                     image_size = 750,
-                    filename) {
+                    filename,
+                    col = NULL) {
 
 
   X <- X - station_point[1]
@@ -65,8 +68,13 @@ var2012 <- function(X, Y, Z,
   Z <- Z - station_point[3]
   X <- X[Z > lens_height]
   Y <- Y[Z > lens_height]
+
+  if (!is.null(col)) col <- col[Z > lens_height]
+
   Z <- Z[Z > lens_height]
   Z <- Z - lens_height
+
+
 
   # to spherical coordinates
   xyz <- cbind(X, Y, Z)
@@ -80,6 +88,8 @@ var2012 <- function(X, Y, Z,
   prz <- prz[indices,]
   distance_from_lens <- sph[indices, 3]
   xyz <- geometry::pol2cart(prz)
+
+  if (!is.null(col)) col <- col[indices]
 
   xy <- data.frame(xyz[,1], xyz[,2])
   xy[,1] <- -xy[,1] # flip in east-west direction
@@ -98,9 +108,17 @@ var2012 <- function(X, Y, Z,
   # I calibrate pointsize to produce the correct
   # point size for 20 cm images so replicate the original research
     graphics::par(mar = c(0,0,0,0), xaxs = "i", yaxs = "i")
-    plot(xy,
-         xlim = xlim, ylim = xlim,
-         pch = 16, cex = cex)
+
+    if (!is.null(col)) {
+      plot(xy,
+           xlim = xlim, ylim = xlim,
+           pch = 16, cex = cex, col = col)
+    } else {
+      plot(xy,
+           xlim = xlim, ylim = xlim,
+           pch = 16, cex = cex)
+    }
+
 
   grDevices::dev.off()
 

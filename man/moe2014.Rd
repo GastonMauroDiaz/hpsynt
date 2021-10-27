@@ -12,7 +12,8 @@ moe2014(
   lens_height = 1,
   size_weight = 0.5,
   image_size = 1000,
-  filename
+  filename,
+  col = NULL
 )
 }
 \arguments{
@@ -30,7 +31,8 @@ seems to manage point size different than R.}
 
 \item{image_size}{numeric. Single value. Width in pixels}
 
-\item{filename}{character. Argument to pass to \code{\link[grDevices]{jpeg}}.}
+\item{filename}{numeric vector. Argument to pass to \code{\link[grDevices]{jpeg}}.
+It must have the same length than X.}
 }
 \value{
 None. It writes a JPEG on \code{filename}.

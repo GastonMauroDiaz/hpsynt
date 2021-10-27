@@ -14,7 +14,8 @@ var2012(
   minimum_base_constant = 0.215,
   distance_thr = 0.75,
   image_size = 750,
-  filename
+  filename,
+  col = NULL
 )
 }
 \arguments{
@@ -35,7 +36,8 @@ size to be printed. See reference for details.}
 
 \item{image_size}{numeric. Single value. Width in pixels}
 
-\item{filename}{character. Argument to pass to \code{\link[grDevices]{jpeg}}.}
+\item{filename}{numeric vector. Argument to pass to \code{\link[grDevices]{jpeg}}.
+It must have the same length than X.}
 
 \item{station_poin}{numeric vector. X, Y, and Z coordinates of a 3D point. It
 represents the position of the virtual tripod.}

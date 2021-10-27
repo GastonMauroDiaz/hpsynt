@@ -19,13 +19,17 @@ moe2014 <- function(X, Y, Z,
                     lens_height = 1,
                     size_weight = 0.5,
                     image_size = 1000,
-                    filename) {
+                    filename,
+                    col = NULL) {
 
   X <- X - station_point[1]
   Y <- Y - station_point[2]
   Z <- Z - station_point[3]
   X <- X[Z > lens_height]
   Y <- Y[Z > lens_height]
+
+  if (!is.null(col)) col <- col[Z > lens_height]
+
   Z <- Z[Z > lens_height]
   Z <- Z - lens_height
 
@@ -50,9 +54,16 @@ moe2014 <- function(X, Y, Z,
 
   grDevices::jpeg(filename, image_size, image_size, "px", quality = 100)
   graphics::par(mar = c(0,0,0,0), xaxs = "i", yaxs = "i")
-  plot(xy,
+
+  if (!is.null(col)) {
+    plot(xy,
+         xlim = xlim, ylim = xlim,
+         pch = 16, cex = cex, col = col)
+  } else {
+    plot(xy,
        xlim = xlim, ylim = xlim,
        pch = 16, cex = cex)
+  }
 
   grDevices::dev.off()
 
